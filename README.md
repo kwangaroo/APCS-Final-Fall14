@@ -10,3 +10,5 @@ Bare Bones (1/6/15):
 4. checker() - Check solutions
 5. printSoln() -  print out the original solution
 6. toString()
+
+1/7/14:created gui file - coded basic layout of the interface
