@@ -14,8 +14,12 @@ public class Sudoku{
     }
 
     public void fillBoard(){
-   
+	int[][]init; 
 
+	//begin with classic board, 3x3 box in top left is 1 2 3 / 4 5 6 / 7 8 9 
+	//helper functions that would go through rows and randomly swap them with a random other row in that group 
+	//same with columns, maybe diagonals
+	//after row swap function, use the checker: if false then call the rowswap again
 
 	soln = board; 
     }
@@ -26,7 +30,7 @@ public class Sudoku{
     public void solver(){
     }
 
-    public void checker(){
+    public boolean checker(){
     }
 
     public void printSoln(){ 
