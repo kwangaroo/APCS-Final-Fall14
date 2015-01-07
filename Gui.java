@@ -21,7 +21,7 @@ public class Gui extends JFrame implements ActionListener{
 	easy = new JButton("Easy");
 	medium = new JButton("Medium");
 	hard = new JButton("Hard");
-	solution = new JButton("Show Solution");
+	solution = new JButton("Show a Solution");
 	difficulty = new JLabel("Difficulty Level:", null, JLabel.CENTER);
 	// initialize space textboxes ):
 
@@ -36,12 +36,13 @@ public class Gui extends JFrame implements ActionListener{
 	solution.setActionCommand("solution");
 	solution.addActionListener(this);
 
-	pane.add(check);
+	pane.add(difficulty);
 	pane.add(easy);
 	pane.add(medium);
 	pane.add(hard);
+	pane.add(check);
 	pane.add(solution);
-	pane.add(difficulty);
+
 
     }
    
