@@ -1,7 +1,9 @@
+import java.util.*;
 public class Sudoku{ 
     private int difficulty;
     int[][]board;
     int[][]soln;
+    Random r = new Random(); 
 
     public Sudoku(){
 	this(9, 2);
@@ -25,13 +27,26 @@ public class Sudoku{
 	    {6,7,8,9,1,2,3,4,5},
 	    {9,1,2,3,4,5,6,7,8}
 	};
-
+	scramblerows(init);
+	scramblecols(init); 
 	//begin with classic board, 3x3 box in top left is 1 2 3 / 4 5 6 / 7 8 9 
 	//helper functions that would go through rows and randomly swap them with a random other row in that group 
 	//same with columns, maybe diagonals
 	//after row swap function, use the checker: if false then call the rowswap again
-
 	soln = board; 
+    }
+
+    public void scramblerows(int[][]a){
+	int rownum = r.nextInt(9); 
+	int[]save;
+	save = new int[9];
+	for(int i=0;i<9;i++){
+	    save[i] = a[rownum][i];
+	}
+	int switchwith = r.nextInt(3) - 2;
+	for(int i=0;i<9;i++){
+	    a[rownum][i]=a[rownum+switchwith][i];
+	}
     }
 
     public void remove(){
