@@ -11,4 +11,8 @@ Bare Bones (1/6/15):
 5. printSoln() -  print out the original solution
 6. toString()
 
-1/7/14:created gui file - coded basic layout of the interface
+1/7/14: created GUI file - coded basic layout of the interface
+1/8/14: tried to create sudoku board
+1/9/14: add menu bar and dropdown choices for GUI
+	error and row switch
+
