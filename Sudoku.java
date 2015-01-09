@@ -14,7 +14,17 @@ public class Sudoku{
     }
 
     public void fillBoard(){
-	int[][]init; 
+     	init=new int[9][9]{
+	    {1,2,3,4,5,6,7,8,9},
+	    {4,5,6,7,8,9,1,2,3},
+	    {7,8,9,1,2,3,4,5,6},
+	    {2,3,4,5,6,7,8,9,1},
+	    {5,6,7,8,9,1,2,3,4},
+	    {8,9,1,2,3,4,5,6,7},
+	    {3,4,5,6,7,8,9,1,2},
+	    {6,7,8,9,1,2,3,4,5},
+	    {9,1,2,3,4,5,6,7,8}
+	};
 
 	//begin with classic board, 3x3 box in top left is 1 2 3 / 4 5 6 / 7 8 9 
 	//helper functions that would go through rows and randomly swap them with a random other row in that group 
