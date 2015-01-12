@@ -15,4 +15,5 @@ Bare Bones (1/6/15):
 1/8/14: tried to create sudoku board
 1/9/14: add menu bar and dropdown choices for GUI
 	error and row switch
+1/12/14: added checker for rows and columns, also scrambler 
 
