@@ -94,11 +94,54 @@ public class Sudoku{
     public void solver(){
     }
 
-    public boolean checker(){
+    public boolean checker(int[][]a){
 	//for loop going through rows/cols/groups 
 	//inside is an arrayList {1,2,3,4,5,6,7,8,9} 
 	//remove as you go through, if false stop the whole thing
+	int save;
+	for(int i=0;i<9;i++){
+	    ArrayList<Integer>base = new ArrayList<Integer>(){{
+		    add(1);
+		    add(2);
+		    add(3);
+		    add(4);
+		    add(5);
+		    add(6);
+		    add(7);
+		    add(8);
+		    add(9);
+		}}
+	    for(int j=0;j<9;j++){
+		a[i][j]=save;
+		if(!base.remove(save)){
+		    return false;
+		}
+		base.remove(save);
+	    }
+	}
+	for(int i=0;i<9;i++){
+	    ArrayList<Integer>base = new ArrayList<Integer>(){{
+		    add(1);
+		    add(2);
+		    add(3);
+		    add(4);
+		    add(5);
+		    add(6);
+		    add(7);
+		    add(8);
+		    add(9);
+		}}
+	    for(int j=0;j<9;j++){
+		a[j][i]=save;
+		if(!base.remove(save)){
+		    return false;
+		}
+		base.remove(save);
+	    }
+	}
+	return true;
     }
+    //also groups 
 
     public void printSoln(){ 
     }
