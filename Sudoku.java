@@ -47,15 +47,48 @@ public class Sudoku{
 	for(int i=0;i<9;i++){
 	    a[rownum][i]=a[rownum+switchwith][i];
 	}
+	for(int i=0;i<9;i++){
+	    a[rownum+switchwith][i]=save[i];
+	}
     }
 
-    public void remove(){
+    public void scramblecols(int[][]a){
+	int colnum = r.NextInt(9);
+	int[]save;
+	save=new int[9];
+	for(int i=0;i<9;i++){
+	    save[i]=a[i][colnum];
+	}
+	int switchwith = r.nextInt(3) - 2;
+	for(int i=0;i<9;i++){
+	    a[i][colnum]=a[i][colnum+switchWith];
+	}
+	for(int i=0;i<9;i++){
+	    a[i][colnum+switchWith]=save[i];
+	}
+    }
+
+    public void remove(int[][]a){
 	//difficulty means that the probability that a number will be removed
 	//easy: 30% chance
 	//medium: 50% chance
 	//hard: 70% chance 
 	//for loop that goes through rows and columns. if there is something there, do the random check & remove & go on
 	//minimum 1 or 2 in each row/col/group box
+	int chance = 30 + (difficulty*20);
+	int save;
+	for(int i=0;i<9;i++){
+	    for(int j=0;j<9;j++){
+		if(r.nextInt(100)+1 < chance){
+		    a[i][j]=save;
+		    a[i][j]=null;
+		    if(!checker(a)){
+			a[i][j]=save;
+			//this is messy 
+		    }
+		}
+	    }
+	}
    }
 
     public void solver(){
