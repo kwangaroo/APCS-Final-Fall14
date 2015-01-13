@@ -10,13 +10,14 @@ public class Sudoku{
     }
 
     public Sudoku(int size, int diff){
-	board = int[size][size];
+	//	board = int[size][];
 	difficulty = diff;
 	//1 is easy, 2 is medium, 3 is hard
     }
 
     public void fillBoard(){
-     	init=new int[9][9]{
+	int[][]init;
+	init=new int[][]{
 	    {1,2,3,4,5,6,7,8,9},
 	    {4,5,6,7,8,9,1,2,3},
 	    {7,8,9,1,2,3,4,5,6},
@@ -26,9 +27,12 @@ public class Sudoku{
 	    {3,4,5,6,7,8,9,1,2},
 	    {6,7,8,9,1,2,3,4,5},
 	    {9,1,2,3,4,5,6,7,8}
-	};
-	scramblerows(init);
-	scramblecols(init); 
+	}; 
+	init = board;
+	//HOW DO I INITIALIZE THIS OMG
+
+	scramblerows(board);
+	scramblecols(board); 
 	//begin with classic board, 3x3 box in top left is 1 2 3 / 4 5 6 / 7 8 9 
 	//helper functions that would go through rows and randomly swap them with a random other row in that group 
 	//same with columns, maybe diagonals
@@ -40,30 +44,30 @@ public class Sudoku{
 	int rownum = r.nextInt(9); 
 	int[]save;
 	save = new int[9];
-	for(int i=0;i<9;i++){
+	for(int i=0; i<9; i++){
 	    save[i] = a[rownum][i];
 	}
-	int switchwith = r.nextInt(3) - 2;
-	for(int i=0;i<9;i++){
-	    a[rownum][i]=a[rownum+switchwith][i];
+	int switchWith = r.nextInt(3) - 2;
+	for(int i=0; i<9; i++){
+	    a[rownum][i]=a[rownum+switchWith][i];
 	}
-	for(int i=0;i<9;i++){
-	    a[rownum+switchwith][i]=save[i];
+	for(int i=0; i<9; i++){
+	    a[rownum+switchWith][i]=save[i];
 	}
     }
 
     public void scramblecols(int[][]a){
-	int colnum = r.NextInt(9);
+	int colnum = r.nextInt(9);
 	int[]save;
 	save=new int[9];
-	for(int i=0;i<9;i++){
+	for(int i=0; i<9; i++){
 	    save[i]=a[i][colnum];
 	}
-	int switchwith = r.nextInt(3) - 2;
-	for(int i=0;i<9;i++){
+	int switchWith = r.nextInt(3) - 2;
+	for(int i=0; i<9; i++){
 	    a[i][colnum]=a[i][colnum+switchWith];
 	}
-	for(int i=0;i<9;i++){
+	for(int i=0; i<9; i++){
 	    a[i][colnum+switchWith]=save[i];
 	}
     }
@@ -76,12 +80,12 @@ public class Sudoku{
 	//for loop that goes through rows and columns. if there is something there, do the random check & remove & go on
 	//minimum 1 or 2 in each row/col/group box
 	int chance = 30 + (difficulty*20);
-	int save;
-	for(int i=0;i<9;i++){
-	    for(int j=0;j<9;j++){
+	int save = 0;
+	for(int i=0; i<9; i++){
+	    for(int j=0; j<9; j++){
 		if(r.nextInt(100)+1 < chance){
 		    a[i][j]=save;
-		    a[i][j]=null;
+		    a[i][j]=0; //no null for int, only for Integer -- we'll figure this out when we get to the GUI? maybe convert 0 to _ in toString
 		    if(!checker(a)){
 			a[i][j]=save;
 			//this is messy 
@@ -98,8 +102,8 @@ public class Sudoku{
 	//for loop going through rows/cols/groups 
 	//inside is an arrayList {1,2,3,4,5,6,7,8,9} 
 	//remove as you go through, if false stop the whole thing
-	int save;
-	for(int i=0;i<9;i++){
+	int save=0;
+	for(int i=0; i<9; i++){
 	    ArrayList<Integer>base = new ArrayList<Integer>(){{
 		    add(1);
 		    add(2);
@@ -110,17 +114,18 @@ public class Sudoku{
 		    add(7);
 		    add(8);
 		    add(9);
-		}}
-	    for(int j=0;j<9;j++){
+		}}; 
+	    for(int j=0; j<9; j++){
 		a[i][j]=save;
-		if(!base.remove(save)){
+		if(!base.contains(save)){
 		    return false;
 		}
 		base.remove(save);
 	    }
 	}
-	for(int i=0;i<9;i++){
-	    ArrayList<Integer>base = new ArrayList<Integer>(){{
+	for(int i=0; i<9; i++){
+	    ArrayList<Integer>base;
+	    base = new ArrayList<Integer>(){{
 		    add(1);
 		    add(2);
 		    add(3);
@@ -130,10 +135,10 @@ public class Sudoku{
 		    add(7);
 		    add(8);
 		    add(9);
-		}}
-	    for(int j=0;j<9;j++){
+		}};
+	    for(int j=0; j<9; j++){
 		a[j][i]=save;
-		if(!base.remove(save)){
+		if(!base.contains(save)){
 		    return false;
 		}
 		base.remove(save);
@@ -142,11 +147,43 @@ public class Sudoku{
 	return true;
     }
     //also groups 
-
+    public boolean checkGroups(int[][]a){
+	int save=0;
+	for(int k=0; k<9; k+=3){
+	    for(int m=0; m<9; m+=3){
+		ArrayList<Integer>base;
+		base = new ArrayList<Integer>(){{
+			add(1);
+			add(2);
+			add(3);
+			add(4);
+			add(5);
+			add(6);
+			add(7);
+			add(8);
+			add(9);
+		    }};
+		for(int n=0; n<3; n++){
+		    for(int o=0; o<3; o++){
+			a[k+n][m+o]=save;
+			if(!base.contains(save)){
+			    return false;
+			}
+			base.remove(save);
+		    }
+		}
+	    }
+	}
+	return true;
+    }
+    //3 nested for loops more like wow this can be done way more easily 
+    //
     public void printSoln(){ 
     }
 
-    public String toString(){
-    }
+    //    public String toString(){
+    //    }
 
 }
+
+//THIS COMPILES
