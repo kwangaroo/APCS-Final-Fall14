@@ -11,9 +11,10 @@ Bare Bones (1/6/15):<br>
 5. printSoln() -  print out the original solution<br>
 6. toString()<br>
 <br>
-1/7/14: created GUI file - coded basic layout of the interface<br>
-1/8/14: tried to create sudoku board<br>
-1/9/14: add menu bar and dropdown choices for GUI<br>
+1/7/15: created GUI file - coded basic layout of the interface<br>
+1/8/15: tried to create sudoku board<br>
+1/9/15: add menu bar and dropdown choices for GUI<br>
 	error and row switch<br>
-1/12/14: added checker for rows and columns, also scrambler <br>
+1/12/15: added checker for rows and columns, also scrambler <br>
+1/13/15: fixed more compiling errors, coded checker for groups. in addition, realized it was 2015, not 2014, and we've been typing the date wrong this entire project. <br>
 
