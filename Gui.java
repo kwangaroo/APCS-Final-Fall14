@@ -5,10 +5,11 @@ import java.awt.event.*;
 public class Gui extends JFrame implements ActionListener{
     private Container pane;
     private JButton check, easy, medium, hard, solution;
-    private JTextField space; //number and location of spaces vary for each puzzle
+    private JTextField f[][];
+    private JPanel p[][];
     private JLabel difficulty;
 
-    public Gui(){
+    public Gui(int size){
 	this.setTitle("Sudoku");
 	this.setSize(900,900);
 	this.setLocation(100,100);
@@ -16,7 +17,24 @@ public class Gui extends JFrame implements ActionListener{
 
 	pane = this.getContentPane();
 	pane.setLayout(new FlowLayout());
+
+	setLayout(new GridLayout());
+	f = new JTextField[size][size];
+	p = new JPanel[(int)Math.sqrt((double)size)][(int)Math.sqrt((double)size)];
+
+	for(int i=0;i<size; i++){
+	    for(int j=0;j<size;j++){
+		f[i][j] = new JTextField(1);
+	    }
+	}
+	for(int i=0;i<Math.sqrt((double)size);i++){
+	    for(int j=0;j<Math.sqrt((double)size);j++){
+		p[i][j] = new Jpanel(new GridLayout(Math.sqrt((double)size), Math.sqrt((double)size)));
+	    }
+	}
 	
+	setLayout(new GridLayout(sqrt((double)size), sqrt((double)size), size, size));
+
 	check = new JButton("Check your solution!");
 	easy = new JButton("Easy");
 	medium = new JButton("Medium");
@@ -50,7 +68,7 @@ public class Gui extends JFrame implements ActionListener{
     }
    
     public static void main(String[]args){
-	Gui g = new Gui();
+	Gui g = new Gui(3);
 	g.setVisible(true);
     }
  }
