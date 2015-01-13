@@ -16,5 +16,7 @@ Bare Bones (1/6/15):<br>
 1/9/15: add menu bar and dropdown choices for GUI<br>
 	error and row switch<br>
 1/12/15: added checker for rows and columns, also scrambler <br>
-1/13/15: fixed more compiling errors, coded checker for groups. in addition, realized it was 2015, not 2014, and we've been typing the date wrong this entire project. we have fixed this problem.<br>
+1/13/15: fixed more compiling errors, coded checker for groups. in addition, realized it was 2015, not 2014, and we've been typing the date wrong this entire project. we have fixed this problem. Also, worked on making the grid for the sudoku board<br>
+
+
 
