@@ -10,14 +10,17 @@ public class Sudoku{
     }
 
     public Sudoku(int size, int diff){
-	//	board = int[size][];
+	board = new int[size][];
 	difficulty = diff;
 	//1 is easy, 2 is medium, 3 is hard
     }
 
+    public int[][] getBoard(){
+	return board;   
+    }
+
     public void fillBoard(){
-	int[][]init;
-	init=new int[][]{
+	int[][]init=new int[][]{
 	    {1,2,3,4,5,6,7,8,9},
 	    {4,5,6,7,8,9,1,2,3},
 	    {7,8,9,1,2,3,4,5,6},
@@ -28,11 +31,11 @@ public class Sudoku{
 	    {6,7,8,9,1,2,3,4,5},
 	    {9,1,2,3,4,5,6,7,8}
 	}; 
-	init = board;
+        board = init;
 	//HOW DO I INITIALIZE THIS OMG
 
-	scramblerows(board);
-	scramblecols(board); 
+	scramblerows();
+	scramblecols(); 
 	//begin with classic board, 3x3 box in top left is 1 2 3 / 4 5 6 / 7 8 9 
 	//helper functions that would go through rows and randomly swap them with a random other row in that group 
 	//same with columns, maybe diagonals
@@ -40,35 +43,34 @@ public class Sudoku{
 	soln = board; 
     }
 
-    public void scramblerows(int[][]a){
+    public void scramblerows(){
 	int rownum = r.nextInt(9); 
-	int[]save;
+	int[]save = new int[9];
 	save = new int[9];
 	for(int i=0; i<9; i++){
-	    save[i] = a[rownum][i];
+	    save[i] = board[rownum][i];
 	}
 	int switchWith = r.nextInt(3) - 2;
 	for(int i=0; i<9; i++){
-	    a[rownum][i]=a[rownum+switchWith][i];
+	    board[rownum][i]=board[rownum+switchWith][i];
 	}
 	for(int i=0; i<9; i++){
-	    a[rownum+switchWith][i]=save[i];
+	    board[rownum+switchWith][i]=save[i];
 	}
     }
 
-    public void scramblecols(int[][]a){
+    public void scramblecols(){
 	int colnum = r.nextInt(9);
-	int[]save;
-	save=new int[9];
+	int[]save=new int[9];
 	for(int i=0; i<9; i++){
-	    save[i]=a[i][colnum];
+	    save[i]=board[i][colnum];
 	}
 	int switchWith = r.nextInt(3) - 2;
 	for(int i=0; i<9; i++){
-	    a[i][colnum]=a[i][colnum+switchWith];
+	    board[i][colnum]=board[i][colnum+switchWith];
 	}
 	for(int i=0; i<9; i++){
-	    a[i][colnum+switchWith]=save[i];
+	    board[i][colnum+switchWith]=save[i];
 	}
     }
 
@@ -99,6 +101,10 @@ public class Sudoku{
     }
 
     public boolean checker(int[][]a){
+	return (lineChecker(a) && checkGroups(a));
+    }
+
+    public boolean lineChecker(int[][]a){
 	//for loop going through rows/cols/groups 
 	//inside is an arrayList {1,2,3,4,5,6,7,8,9} 
 	//remove as you go through, if false stop the whole thing
@@ -178,11 +184,19 @@ public class Sudoku{
     }
     //3 nested for loops more like wow this can be done way more easily 
     //
+
     public void printSoln(){ 
+	System.out.println(soln.toString());
     }
 
-    //    public String toString(){
-    //    }
+    public static void main(String[]args){
+	Sudoku a = new Sudoku(); 
+	a.fillBoard();
+	System.out.println(a);
+	a.remove(a.getBoard());
+	a.printSoln();
+	System.out.println(a);
+    }
 
 }
 
