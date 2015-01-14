@@ -5,11 +5,11 @@ import java.awt.event.*;
 public class Gui extends JFrame implements ActionListener{
     private Container pane;
     private JButton check, easy, medium, hard, solution;
-    private JTextField f[][];
-    private JPanel p[][];
+    private JTextField f[][] = new JTextField[9][9];
+    private JPanel p[][] = new JPanel[3][3];
     private JLabel difficulty;
 
-    public Gui(int size){
+    public Gui(){
 	this.setTitle("Sudoku");
 	this.setSize(900,900);
 	this.setLocation(100,100);
@@ -18,22 +18,30 @@ public class Gui extends JFrame implements ActionListener{
 	pane = this.getContentPane();
 	pane.setLayout(new FlowLayout());
 
-	setLayout(new GridLayout());
-	f = new JTextField[size][size];
-	p = new JPanel[(int)Math.sqrt((double)size)][(int)Math.sqrt((double)size)];
+	JPanel p = new JPanel      (new GridLayout());
 
-	for(int i=0;i<size; i++){
-	    for(int j=0;j<size;j++){
+	for(int i=0;i<9; i++){
+	    for(int j=0;j<9;j++){
 		f[i][j] = new JTextField(1);
 	    }
 	}
-	for(int i=0;i<Math.sqrt((double)size);i++){
-	    for(int j=0;j<Math.sqrt((double)size);j++){
-		p[i][j] = new Jpanel(new GridLayout(Math.sqrt((double)size), Math.sqrt((double)size)));
+	for(int i=0;i<3;i++){
+	    for(int j=0;j<3;j++){
+		p[i][j] = new JPanel(new GridLayout(3,3));
 	    }
 	}
 	
-	setLayout(new GridLayout(sqrt((double)size), sqrt((double)size), size, size));
+	p.setLayout(new GridLayout(3,3,5,5));
+
+	for(int i=0; i<3; i++){
+	    for(int j=0;j<3;j++){
+		for(int x=0;x<3;x++){
+		    for(int y =0; y<3;y++){
+			p[i][j].add(f[y+i*3][x+j*3]);
+		    }
+		}
+	    }
+	}
 
 	check = new JButton("Check your solution!");
 	easy = new JButton("Easy");
@@ -68,7 +76,7 @@ public class Gui extends JFrame implements ActionListener{
     }
    
     public static void main(String[]args){
-	Gui g = new Gui(3);
+	Gui g = new Gui();
 	g.setVisible(true);
     }
  }
