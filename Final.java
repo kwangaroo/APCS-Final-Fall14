@@ -2,42 +2,43 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Final{
+public class Final extends JFrame{
+	private JTextField blank[][] = new JTextField[9][9];
+	private JPanel grid[][] = new JPanel[3][3];
+	
     public Final(){
-	JFrame frame = new JFrame("Sudoku");
-	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	
-	frame.add(new JLabel("Difficulty Level"));
-	DefaultComboBoxModel model = new DefaultComboBoxModel();
-	model.addElement("Easy");
-	model.addElement("Medium");
-	model.addElement("Hard");
-	JComboBox comboBox = new JComboBox(model);
-	
-	//creates a menu bar
-	JMenuBar menu = new JMenuBar();
-	menu.setOpaque(true);
-	menu.setBackground(new Color(154,165,127));
-	menu.setPreferredSize(new Dimension(900,900));
-	
-	//creates label to put in content pane
-	JLabel label = new JLabel();
-	label.setOpaque(true);
-	label.setBackground(new Color(248,213,131));
-	label.setPreferredSize(new Dimension(900,180));
-	
-	frame.setJMenuBar(menu);
-	frame.getContentPane().add(comboBox);
-	frame.getContentPane().add(label, BorderLayout.CENTER);
+	super("Sudoku");
 
-	frame.pack();
-	frame.setVisible(true);
+	for(int i=0;i<9;i++){
+	    for(int j=0;j<9;j++){
+		blank[i][j] = new JTextField(1);
+	    }
+	}
 	
+	for(int i=0;i<3;i++){
+	    for(int j=0;j<3;j++){
+		grid[i][j] = new JPanel(new GridLayout(3,3));
+	    }
+	}
+
+	setLayout(new GridLayout(3,3,5,5));
+	setSize(450,450);
+	setLocation(500,100);
+
+	for(int i=0; i<3; i++){
+	    for(int j=0;j<3;j++){
+		for(int x=0;x<3;x++){
+		    for(int y =0; y<3;y++){
+			grid[i][j].add(blank[y+i*3][x+j*3]);
+		    }
+		}
+		add(grid[i][j]);
+	    }
+	}
     }
     
     public static void main(String[]args){
 	Final g = new Final();
+	g.setVisible(true);
     }
 }
-			   
-    
