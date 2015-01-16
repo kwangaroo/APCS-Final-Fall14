@@ -2,8 +2,8 @@ import java.util.*;
 public class Sudoku{ 
     private int difficulty;
     int[][]board;
-    int[][]soln= new int[9][];
-    Random r = new Random(); 
+    int[][]solution;
+    Random r;
 
     public Sudoku(){
 	this(9, 2);
@@ -11,6 +11,8 @@ public class Sudoku{
 
     public Sudoku(int size, int diff){
 	board = new int[size][];
+	r = new Random(); 
+	solution = new int[9][9];
 	difficulty = diff;
 	//1 is easy, 2 is medium, 3 is hard
     }
@@ -34,30 +36,40 @@ public class Sudoku{
         board = init;
 	//HOW DO I INITIALIZE THIS OMG
 
-	scramblerows();
-	scramblecols(); 
-
-	int[][]b = new int[9][];
-	for(int i=0;i<9;i++){
-	    for(int j=0;j<9;j++){
-		b[i][j]=board[i][j];
-	    }
-	}
-	soln=b;
+	scramble();
+	copySoln();
 	//begin with classic board, 3x3 box in top left is 1 2 3 / 4 5 6 / 7 8 9 
 	//helper functions that would go through rows and randomly swap them with a random other row in that group 
 	//same with columns, maybe diagonals
 	//after row swap function, use the checker: if false then call the rowswap again
     }
 
-    public void scramblerows(){
-	int rownum = r.nextInt(9); 
+    public void copySoln(){
+	int[][]b = getBoard();
+	for(int i=0;i<9;i++){
+	    for(int j=0;j<9;j++){
+		solution[i][j]=b[i][j];
+	    }
+	}
+    }
+
+    public void scramble(){
+	Random c = new Random();
+	scramblerows(c);
+	scramblecols(c);
+	//	if(!checker(board)){
+	//	    scramble();
+	//	}
+    }
+
+    public void scramblerows(Random a){
+	int rownum = a.nextInt(9); 
 	int[]save = new int[9];
 	save = new int[9];
 	for(int i=0; i<9; i++){
 	    save[i] = board[rownum][i];
 	}
-	int switchWith = r.nextInt(3) - 2;
+	int switchWith = a.nextInt(3) - 2;
 	for(int i=0; i<9; i++){
 	    if(rownum+switchWith<9 && rownum+switchWith >= 0){
 	    board[rownum][i]=board[rownum+switchWith][i];
@@ -70,13 +82,13 @@ public class Sudoku{
 	}
     }
 
-    public void scramblecols(){
-	int colnum = r.nextInt(9);
+    public void scramblecols(Random a){
+	int colnum = a.nextInt(9);
 	int[]save=new int[9];
 	for(int i=0; i<9; i++){
 	    save[i]=board[i][colnum];
 	}
-	int switchWith = r.nextInt(3) - 2;
+	int switchWith = a.nextInt(3) - 2;
 	for(int i=0; i<9; i++){
 	    if(colnum+switchWith >= 0 && colnum+switchWith < 9){
 	    board[i][colnum]=board[i][colnum+switchWith];
@@ -88,6 +100,7 @@ public class Sudoku{
 	    }
 	}
     }
+
 
     public void remove(int[][]a){
 	//difficulty means that the probability that a number will be removed
@@ -215,12 +228,13 @@ public class Sudoku{
     }
 
     public int[][] getSoln(){
-	return soln;
+	return solution;
     }
 
     public void printSoln(){ 
 	System.out.println(toString(getSoln()));
     }
+
     public void printBoard(){
 	System.out.println(toString(getBoard()));
     }
@@ -240,7 +254,7 @@ public class Sudoku{
 	c.fillBoard();
 	c.remove(c.getBoard());
 	System.out.println("HARD:\n");
-	//	c.printSoln();
+	c.printSoln();
 	c.printBoard();
     }
 
