@@ -17,6 +17,9 @@ Bare Bones (1/6/15):<br>
 	error and row switch<br>
 1/12/15: added checker for rows and columns, also scrambler <br>
 1/13/15: fixed more compiling errors, coded checker for groups. in addition, realized it was 2015, not 2014, and we've been typing the date wrong this entire project. we have fixed this problem. Also, worked on making the grid for the sudoku board<br>
+1/14/15: put in main and made code less complicated; and continued working on the grid board <br>
+1/15/15: MADE IT WORK!!!! grid now complete and code prints out random sodoku puzzles!! :D <br>
+
 
 
 
