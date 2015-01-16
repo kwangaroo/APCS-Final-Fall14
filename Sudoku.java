@@ -2,7 +2,7 @@ import java.util.*;
 public class Sudoku{ 
     private int difficulty;
     int[][]board;
-    int[][]soln;
+    int[][]soln= new int[9][];
     Random r = new Random(); 
 
     public Sudoku(){
@@ -36,11 +36,18 @@ public class Sudoku{
 
 	scramblerows();
 	scramblecols(); 
+
+	int[][]b = new int[9][];
+	for(int i=0;i<9;i++){
+	    for(int j=0;j<9;j++){
+		b[i][j]=board[i][j];
+	    }
+	}
+	soln=b;
 	//begin with classic board, 3x3 box in top left is 1 2 3 / 4 5 6 / 7 8 9 
 	//helper functions that would go through rows and randomly swap them with a random other row in that group 
 	//same with columns, maybe diagonals
 	//after row swap function, use the checker: if false then call the rowswap again
-	soln = board; 
     }
 
     public void scramblerows(){
@@ -52,10 +59,14 @@ public class Sudoku{
 	}
 	int switchWith = r.nextInt(3) - 2;
 	for(int i=0; i<9; i++){
+	    if(rownum+switchWith<9 && rownum+switchWith >= 0){
 	    board[rownum][i]=board[rownum+switchWith][i];
+	    }
 	}
 	for(int i=0; i<9; i++){
-	    board[rownum+switchWith][i]=save[i];
+	    if(rownum+switchWith<9 && rownum+switchWith >= 0){
+		board[rownum+switchWith][i]=save[i];
+	    }
 	}
     }
 
@@ -67,10 +78,14 @@ public class Sudoku{
 	}
 	int switchWith = r.nextInt(3) - 2;
 	for(int i=0; i<9; i++){
+	    if(colnum+switchWith >= 0 && colnum+switchWith < 9){
 	    board[i][colnum]=board[i][colnum+switchWith];
+	    }
 	}
 	for(int i=0; i<9; i++){
+	    if(colnum+switchWith >= 0 && colnum+switchWith < 9){
 	    board[i][colnum+switchWith]=save[i];
+	    }
 	}
     }
 
@@ -96,9 +111,6 @@ public class Sudoku{
 	    }
 	}
    }
-
-    public void solver(){
-    }
 
     public boolean checker(int[][]a){
 	return (lineChecker(a) && checkGroups(a));
@@ -185,19 +197,55 @@ public class Sudoku{
     //3 nested for loops more like wow this can be done way more easily 
     //
 
+    public String toString(int[][]a){
+	String str="";
+	int save =0;
+	for(int i=0; i<9; i++){
+	    for(int j=0; j<9; j++){
+		save = a[i][j];
+		if(save==0){
+		    str+="_";
+		}else{
+		str+= "" + a[i][j];	
+		}
+	    }
+	    str+="\n";
+	}
+	return str;
+    }
+
+    public int[][] getSoln(){
+	return soln;
+    }
+
     public void printSoln(){ 
-	System.out.println(soln.toString());
+	System.out.println(toString(getSoln()));
+    }
+    public void printBoard(){
+	System.out.println(toString(getBoard()));
     }
 
     public static void main(String[]args){
+	Sudoku b = new Sudoku(9,1);
+	b.fillBoard();
+	b.remove(b.getBoard());
+	System.out.println("EASY:\n");
+	b.printBoard();
 	Sudoku a = new Sudoku(); 
 	a.fillBoard();
-	System.out.println(a);
 	a.remove(a.getBoard());
-	a.printSoln();
-	System.out.println(a);
+	System.out.println("MEDIUM:\n");
+	a.printBoard();
+	Sudoku c = new Sudoku(9,3);
+	c.fillBoard();
+	c.remove(c.getBoard());
+	System.out.println("HARD:\n");
+	//	c.printSoln();
+	c.printBoard();
     }
 
 }
 
 //THIS COMPILES
+//THIS WORKS
+//i'd like to thank the academy, tina zhang, sashasharks, tea 'n' a coffee, stackoverflow, and also Jesus
