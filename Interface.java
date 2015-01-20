@@ -78,5 +78,19 @@ public class Interface extends JFrame implements ActionListener{
 	}
 
     public void actionPerformed(ActionEvent e){
+		String action = e.getActionCommand();
+		//if (action.equals("Check"){
+		//if(action.equals("solution"){
+		if(action.equals("easy")){
+			Sudoku a = new Sudoku(1);
+		}
+		if(action.equals("medium")){
+			Sudoku a = new Sudoku(2);
+		}
+		if(action.equals("hard")){
+			Sudoku a = new Sudoku(3);
+		}
+
+			
     }
 }
