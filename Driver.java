@@ -1,8 +1,8 @@
 public class Driver{
     public static void main(String[]args){
-	Final g = new Final();
+	Interface g = new Interface();
 	g.setVisible(true);
-	Sudoku a = new Sudoku();
+
 
     }
 }
