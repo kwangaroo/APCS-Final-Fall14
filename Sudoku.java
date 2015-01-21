@@ -54,53 +54,81 @@ public class Sudoku{
     }
 
     public void scramble(){
-	Random c = new Random();
-	scramblerows(c);
-	scramblecols(c);
-	//	if(!checker(board)){
-	//	    scramble();
-	//	}
+	scramblerows();
+	scramblecols();
+	//	scrambleGroups();
     }
 
-    public void scramblerows(Random a){
-	int rownum = a.nextInt(9); 
+    public void scramblerows(){ 
+	int rownum;
+	Random a = new Random();
 	int[]save = new int[9];
 	save = new int[9];
-	for(int i=0; i<9; i++){
-	    save[i] = board[rownum][i];
-	}
-	int switchWith = a.nextInt(3) - 2;
-	for(int i=0; i<9; i++){
-	    if(rownum+switchWith<9 && rownum+switchWith >= 0){
-	    board[rownum][i]=board[rownum+switchWith][i];
+	for(int j=1;j<8;j+=3){
+	    rownum=j;
+	    int switchWith = a.nextInt(3) - 1;
+	    for(int i=0; i<9; i++){
+		save[i] = board[rownum][i];
 	    }
-	}
-	for(int i=0; i<9; i++){
-	    if(rownum+switchWith<9 && rownum+switchWith >= 0){
-		board[rownum+switchWith][i]=save[i];
+	    for(int i=0; i<9; i++){
+		if(rownum+switchWith<9 && rownum+switchWith >= 0){
+		    board[rownum][i]=board[rownum+switchWith][i];
+		    }
+	    }
+	    for(int i=0; i<9; i++){
+		if(rownum+switchWith<9 && rownum+switchWith >= 0){
+		    board[rownum+switchWith][i]=save[i];
+		}
 	    }
 	}
     }
 
-    public void scramblecols(Random a){
-	int colnum = a.nextInt(9);
+
+
+    public void scrambleGroups(){
+	Random a = new Random();
+	int whichGroup = a.nextInt(3);
+	int[][]save=new int[3][9];
+	for(int i=0;i<3;i++){
+	    for(int j=0;j<9;j++){
+		save[i][j]=board[whichGroup*3 + i][j];
+	    }
+	}
+	int switchWith = a.nextInt(3);
+	for(int k=0;k<3;k++){
+	    for(int m=0;m<9;m++){
+		board[whichGroup*3+k][m]=board[switchWith*3+k][m];
+	    }
+	}
+	for(int n=0;n<3;n++){
+	    for(int o=0;o<9;o++){
+		board[switchWith*3+n][o]=save[n][o];
+	    }
+	}
+
+    }
+    public void scramblecols(){
+	Random a = new Random();
+	int colnum;
 	int[]save=new int[9];
-	for(int i=0; i<9; i++){
-	    save[i]=board[i][colnum];
-	}
-	int switchWith = a.nextInt(3) - 2;
-	for(int i=0; i<9; i++){
-	    if(colnum+switchWith >= 0 && colnum+switchWith < 9){
-	    board[i][colnum]=board[i][colnum+switchWith];
+	for(int k=1;k<8;k+=3){
+	    colnum = k;
+	    for(int i=0; i<9; i++){
+		save[i]=board[i][colnum];
 	    }
-	}
-	for(int i=0; i<9; i++){
-	    if(colnum+switchWith >= 0 && colnum+switchWith < 9){
-	    board[i][colnum+switchWith]=save[i];
+	    int switchWith = a.nextInt(3) - 1;
+	    for(int i=0; i<9; i++){
+		if(colnum+switchWith >= 0 && colnum+switchWith < 9){
+		    board[i][colnum]=board[i][colnum+switchWith];
+		}
+	    }
+	    for(int i=0; i<9; i++){
+		if(colnum+switchWith >= 0 && colnum+switchWith < 9){
+		    board[i][colnum+switchWith]=save[i];
+		}
 	    }
 	}
     }
-
 
     public void remove(int[][]a){
 	//difficulty means that the probability that a number will be removed
