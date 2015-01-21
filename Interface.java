@@ -96,38 +96,39 @@ public class Interface extends JFrame implements ActionListener{
 		a.fillBoard();
 		a.remove(a.getBoard());
 		int [][] board = a.getBoard();
-
+		
 		JPanel easyPanel = new JPanel (new GridLayout(3,3,5,5));
-
+		
 		for(int i=0;i<9;i++){
-			for(int j=0;j<9;j++){
-				if(board[i][j] == 0){
-					blank[i][j] = new JTextField(1);
-				}else{
-					blank[i][j].setText(""+ board[i][j]);
-				}
+		    for(int j=0;j<9;j++){
+			if(board[i][j] == 0){
+			    blank[i][j] = new JTextField(1);
+			}else{
+			    blank[i][j]= new JTextField(1);
+			    blank[i][j].setText(""+ board[i][j]);
 			}
+		    }
 		}
-
+		
 		for(int i=0;i<3;i++){
-			for(int j=0;j<3;j++){
-				grid[i][j] = new JPanel(new GridLayout(3,3));
-			}
+		    for(int j=0;j<3;j++){
+			grid[i][j] = new JPanel(new GridLayout(3,3));
+		    }
 		}
-
+		
 		for(int i=0;i<3;i++){
-			for(int j=0;j<3;j++){
-				for(int x=0;x<3;x++){
-					for(int y=0;y<3;y++){
-						grid[i][j].add(blank[y+i*3][x+j*3]);
-					}
-				}
-				easyPanel.add(grid[i][j]);
+		    for(int j=0;j<3;j++){
+			for(int x=0;x<3;x++){
+			    for(int y=0;y<3;y++){
+				grid[i][j].add(blank[y+i*3][x+j*3]);
+			    }
 			}
+			easyPanel.add(grid[i][j]);
+		    }
 		}
 		return easyPanel;
 	}
-
+    
     public void actionPerformed(ActionEvent e){
 		String action = e.getActionCommand();
 		//if (action.equals("Check"){
