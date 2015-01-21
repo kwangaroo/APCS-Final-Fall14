@@ -1,7 +1,7 @@
 APCS-Final-Fall14
 Sudoku Game
 =================
-This project first generates a finished sudoku puzzle, removes numbers randomly (while still checking that the game is solveable), then lets users plug in the values using GUI and checks if they're correct or not. Multiple difficulty levels, and an option to show a possible solution (the one that we started with). Users could potentially choose how big the Sudoku puzzle'll be, given that users provide a non-prime number. (this may be hopeful dreaming.)
+This project first generates a finished sudoku puzzle, removes numbers randomly (while still checking that the game is solveable), then lets users plug in the values using GUI. Multiple difficulty levels, and an option to show a possible solution (the one that we started with). Users could potentially choose how big the Sudoku puzzle'll be, given that users provide a non-prime number. (this may be hopeful dreaming.)
 
 Bare Bones (1/6/15):<br>
 1.fillBoard(size) - creates a finished board. <br>
@@ -21,6 +21,7 @@ Bare Bones (1/6/15):<br>
 1/15/15: MADE IT WORK!!!! grid now complete and code prints out random sodoku puzzles!! :D <br>
 1/16/15: got solution to work!! adding a toolbar for menu options <br>
 1/19/15: gui interface is all set! all we need to do now is combine the code and the gui
+1/21/15: all set
 
 
 
