@@ -8,6 +8,7 @@ public class Interface extends JFrame implements ActionListener{
     private JTextField blank[][] = new JTextField[9][9];
     private JPanel grid[][] = new JPanel[3][3];
     private JButton  easy, medium, hard, solution;
+    private int [][] soln;
 	public Interface(){
 		setTitle("Sudoku");
 		getContentPane().add(createTopPanel(), BorderLayout.NORTH);
@@ -77,7 +78,7 @@ public class Interface extends JFrame implements ActionListener{
 	a.fillBoard();
 	a.remove(a.getBoard());
 	int [][] board = a.getBoard();
-	int[][] soln = a.getSoln();
+        soln = a.getSoln();
 	
 	JPanel easyPanel = new JPanel (new GridLayout(3,3,5,5));
 		
@@ -116,7 +117,7 @@ public class Interface extends JFrame implements ActionListener{
 	a.fillBoard();
 	a.remove(a.getBoard());
 	int [][] board = a.getBoard();
-	int [][] soln = a.getSoln();
+	soln = a.getSoln();
 		
 	JPanel hardPanel = new JPanel (new GridLayout(3,3,5,5));
 	
@@ -155,75 +156,74 @@ public class Interface extends JFrame implements ActionListener{
 	a.fillBoard();
 	a.remove(a.getBoard());
 	int [][] board = a.getBoard();
-	int[][] soln = a.getSoln();
+        soln = a.getSoln();
 	
-	if(b == 1){
-	    JPanel medPanel = new JPanel (new GridLayout(3,3,5,5));
-		
-	    for(int i=0;i<9;i++){
-		for(int j=0;j<9;j++){
-		    if(board[i][j] == 0){
+	JPanel medPanel = new JPanel (new GridLayout(3,3,5,5));
+	
+	for(int i=0;i<9;i++){
+	    for(int j=0;j<9;j++){
+		if(board[i][j] == 0){
 			blank[i][j] = new JTextField(1);
-		    }else{
-			blank[i][j]= new JTextField("" + board[i][j]);
-			blank[i][j].setEditable(false);
-		    }
+		}else{
+		    blank[i][j]= new JTextField("" + board[i][j]);
+		    blank[i][j].setEditable(false);
 		}
 	    }
-	    for(int i=0;i<3;i++){
-		for(int j=0;j<3;j++){
-		    grid[i][j] = new JPanel(new GridLayout(3,3));
-		}
-	    }
-	    
-	    for(int i=0;i<3;i++){
-		for(int j=0;j<3;j++){
-		    for(int x=0;x<3;x++){
-		    for(int y=0;y<3;y++){
-			grid[i][j].add(blank[y+i*3][x+j*3]);
-		    }
-		    }
-		    medPanel.add(grid[i][j]);
-		}
-	    }
-	    return medPanel;
-	}else{
-	    JPanel solnPanel = new JPanel (new GridLayout(3,3,5,5));
-		
-	    for(int i=0;i<9;i++){
-		for(int j=0;j<9;j++){
-			blank[i][j]= new JTextField("" + soln[i][j]);
-			blank[i][j].setEditable(false);
-		}
-	    }
-   
-	    for(int i=0;i<3;i++){
-		for(int j=0;j<3;j++){
-		    grid[i][j] = new JPanel(new GridLayout(3,3));
-		}
-	    }
-	    
-	    for(int i=0;i<3;i++){
-		for(int j=0;j<3;j++){
-		    for(int x=0;x<3;x++){
-		    for(int y=0;y<3;y++){
-			grid[i][j].add(blank[y+i*3][x+j*3]);
-		    }
-		    }
-		    solnPanel.add(grid[i][j]);
-		}
-	    }
-	    return solnPanel;
 	}
+	for(int i=0;i<3;i++){
+	    for(int j=0;j<3;j++){
+		grid[i][j] = new JPanel(new GridLayout(3,3));
+		}
+	}
+	
+	for(int i=0;i<3;i++){
+	    for(int j=0;j<3;j++){
+		for(int x=0;x<3;x++){
+		    for(int y=0;y<3;y++){
+			grid[i][j].add(blank[y+i*3][x+j*3]);
+		    }
+		}
+		medPanel.add(grid[i][j]);
+		}
+	}
+	return medPanel;
     }
-	    
+
+    public JPanel createSolutionPanel(){	
+	JPanel solnPanel = new JPanel (new GridLayout(3,3,5,5));
+	
+	for(int i=0;i<9;i++){
+	    for(int j=0;j<9;j++){
+		    blank[i][j]= new JTextField("" + soln[i][j]);
+		    blank[i][j].setEditable(false);
+	    }
+	}
+	
+	for(int i=0;i<3;i++){
+	    for(int j=0;j<3;j++){
+		grid[i][j] = new JPanel(new GridLayout(3,3));
+		}
+	}
+	
+	for(int i=0;i<3;i++){
+	    for(int j=0;j<3;j++){
+		for(int x=0;x<3;x++){
+		    for(int y=0;y<3;y++){
+			grid[i][j].add(blank[y+i*3][x+j*3]);
+		    }
+		}
+		solnPanel.add(grid[i][j]);
+		}
+	}
+	return solnPanel;
+    }
 
     
     public void actionPerformed(ActionEvent e){
 		String action = e.getActionCommand();
 		if(action.equals("solution")){
 		    getContentPane().remove(createCenterPanel());
-		    getContentPane().add(createMediumPanel(0), BorderLayout.CENTER);
+		    getContentPane().add(createSolutionPanel(), BorderLayout.CENTER);
 		    getContentPane().invalidate();
 		    getContentPane().validate();
 		}
