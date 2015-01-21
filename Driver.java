@@ -1,7 +1,7 @@
 public class Driver{
     public static void main(String[]args){
-	Interface g = new Interface();
-	g.setVisible(true);
+	Interface a = new Interface();
+	a.setVisible(true);
 
 
     }
