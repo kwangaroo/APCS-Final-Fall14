@@ -6,11 +6,11 @@ public class Sudoku{
     Random r;
 
     public Sudoku(){
-	this(9, 2);
+	this(2);
     }
 
-    public Sudoku(int size, int diff){
-	board = new int[size][];
+    public Sudoku(int diff){
+	board = new int[9][9];
 	r = new Random(); 
 	solution = new int[9][9];
 	difficulty = diff;
@@ -240,7 +240,7 @@ public class Sudoku{
     }
 
     public static void main(String[]args){
-	Sudoku b = new Sudoku(9,1);
+	Sudoku b = new Sudoku(1);
 	b.fillBoard();
 	b.remove(b.getBoard());
 	System.out.println("EASY:\n");
@@ -250,7 +250,7 @@ public class Sudoku{
 	a.remove(a.getBoard());
 	System.out.println("MEDIUM:\n");
 	a.printBoard();
-	Sudoku c = new Sudoku(9,3);
+	Sudoku c = new Sudoku(3);
 	c.fillBoard();
 	c.remove(c.getBoard());
 	System.out.println("HARD:\n");
