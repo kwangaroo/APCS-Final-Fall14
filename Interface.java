@@ -104,8 +104,8 @@ public class Interface extends JFrame implements ActionListener{
 			if(board[i][j] == 0){
 			    blank[i][j] = new JTextField(1);
 			}else{
-			    blank[i][j]= new JTextField(1);
-			    blank[i][j].setText(""+ board[i][j]);
+			    blank[i][j]= new JTextField("" + board[i][j]);
+			    blank[i][j].setEditable(false);
 			}
 		    }
 		}
