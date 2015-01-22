@@ -55,8 +55,8 @@ public class Sudoku{
 
     public void scramble(){
 	scramblerows();
+	scrambleGroups();
 	scramblecols();
-	//	scrambleGroups();
     }
 
     public void scramblerows(){ 
@@ -113,7 +113,7 @@ public class Sudoku{
 	int[]save=new int[9];
 	for(int k=1;k<8;k+=3){
 	    colnum = k;
-	    for(int i=0; i<9; i++){
+	    for(int i=0; i<9; i++){ 
 		save[i]=board[i][colnum];
 	    }
 	    int switchWith = a.nextInt(3) - 1;
